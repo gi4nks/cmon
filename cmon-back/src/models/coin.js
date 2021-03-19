@@ -5,8 +5,8 @@ const coinSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
-    type: Date,
+  category: {
+    type: String,
     required: false
   },
   amount: {
@@ -16,5 +16,24 @@ const coinSchema = new mongoose.Schema({
 });
 
 const Coin = mongoose.model('Coin', coinSchema);
+
+/*
+coinSchema.statics.deleteById = async function (cid, next) {
+    c.findById(req.body.company).exec((err, comp) => {
+        if (err) {
+          next(boom.badImplementation(err));
+        }
+
+    bc.save((err, b) => {
+      if (err) {
+        next(boom.badImplementation(err));
+      } else {
+        helpers.LOGGER.debug(`blockchain saved to blocks collection.`);
+  
+        next();
+      }
+    });
+  };
+  */
 
 export default Coin;

@@ -145,3 +145,4 @@ Desktop.ini
 npm/
 express-2/.compiled
 cmon-back/package-lock.json
+cmon-back/.env

@@ -55,12 +55,20 @@ class Coin {
 
   static delete(req, res, next) {
     helpers.LOGGER.info("delete - '/' - called");
-    const obj = new models.Coin(req.params.id);
+    const cid = req.params.id;
 
-    helpers.LOGGER.info(`object modeled: ${JSON.stringify(obj)}`);
-    obj.save((err, o) => {
+    helpers.LOGGER.info(`cid: ${JSON.stringify(cid)}`);
+
+    models.Coin.findByIdAndDelete(cid, (err, o) => {
+      helpers.LOGGER.info(`error: ${JSON.stringify(err)}`);
       if (err) {
-        next(boom.badImplementation(err));
+        next(boom.notFound(err));
+        return;
+      }
+
+      if (o == null) {
+        next(boom.notFound(err));
+        return;
       }
 
       return res.status(201).json(o);

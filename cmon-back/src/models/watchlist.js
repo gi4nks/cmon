@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const coinSchema = new mongoose.Schema({
+const watchlistSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -15,6 +15,6 @@ const coinSchema = new mongoose.Schema({
   }
 });
 
-const Coin = mongoose.model('Coin', coinSchema);
+const Watchlist = mongoose.model('Watchlist', watchlistSchema);
 
-export default Coin;
+export default Watchlist;

@@ -1,6 +1,13 @@
 import helpers from '../helpers';
 
 const errorHandler = (err, req, res, next) => {
+  /*
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  return res.json({ error: err });
+   */
   helpers.LOGGER.info(`errorHandler - '${err}' - ${err.output.statusCode} - ${err.output.payload}`);
 
   if (err.name === 'UnauthorizedError') {

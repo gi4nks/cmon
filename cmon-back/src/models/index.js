@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import MongoMemoryServer from 'mongodb-memory-server';
 
 import Coin from './coin';
+import CoinValue from './coinvalue';
 
 const mongod = new MongoMemoryServer();
 
@@ -35,7 +36,7 @@ const clearDb = async () => {
   }
 };
 
-const models = { Coin };
+const models = { Coin, CoinValue };
 
 export { connectDb, closeDb, clearDb };
 

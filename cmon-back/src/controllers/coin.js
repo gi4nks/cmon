@@ -16,13 +16,15 @@ class Coin {
 
     const query = {};
 
-    models.Coin.find(query, (err, objs) => {
-      if (err) {
-        next(boom.badRequest(err));
-      }
-
-      return res.json(objs);
-    });
+    models.Coin.find(query)
+      .populate('values')
+      .exec((err, objs) => {
+        helpers.LOGGER.info(`coins: ${JSON.stringify(objs, null, '\t')}`);
+        if (err) {
+          next(boom.badRequest(err));
+        }
+        return res.status(200).json(objs);
+      });
   }
 
   static create(req, res, next) {
@@ -35,7 +37,7 @@ class Coin {
         next(boom.badImplementation(err));
       }
 
-      return res.status(201).json(o);
+      return res.status(200).json(o);
     });
   }
 
@@ -49,7 +51,7 @@ class Coin {
         next(boom.badImplementation(err));
       }
 
-      return res.status(201).json(o);
+      return res.status(200).json(o);
     });
   }
 
@@ -71,7 +73,7 @@ class Coin {
         return;
       }
 
-      return res.status(201).json(o);
+      return res.status(200).json(o);
     });
   }
 }

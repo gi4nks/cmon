@@ -5,14 +5,7 @@ const watchlistSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  category: {
-    type: String,
-    required: false
-  },
-  amount: {
-    type: Number,
-    required: false
-  }
+  assets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Asset' }]
 });
 
 const Watchlist = mongoose.model('Watchlist', watchlistSchema);

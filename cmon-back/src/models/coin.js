@@ -5,14 +5,11 @@ const coinSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  category: {
-    type: String,
-    required: false
-  },
   amount: {
     type: Number,
     required: false
-  }
+  },
+  values: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CoinValue' }]
 });
 
 const Coin = mongoose.model('Coin', coinSchema);

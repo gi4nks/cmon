@@ -4,7 +4,7 @@ import helpers from '../helpers';
 
 import models from '../models';
 
-class Coin {
+class CoinValue {
   // eslint-disable-next-line no-useless-constructor
   // eslint-disable-next-line no-empty-function
   constructor() {
@@ -16,20 +16,18 @@ class Coin {
 
     const query = {};
 
-    models.Coin.find(query)
-      .populate('values')
-      .exec((err, objs) => {
-        helpers.LOGGER.info(`coins: ${JSON.stringify(objs, null, '\t')}`);
-        if (err) {
-          next(boom.badRequest(err));
-        }
-        return res.status(200).json(objs);
-      });
+    models.CoinValue.find(query, (err, objs) => {
+      if (err) {
+        next(boom.badRequest(err));
+      }
+
+      return res.status(200).json(objs);
+    });
   }
 
   static create(req, res, next) {
     helpers.LOGGER.info("post - '/' - called");
-    const obj = new models.Coin(req.body);
+    const obj = new models.CoinValue(req.body);
 
     helpers.LOGGER.info(`object modeled: ${JSON.stringify(obj)}`);
     obj.save((err, o) => {
@@ -43,7 +41,7 @@ class Coin {
 
   static modify(req, res, next) {
     helpers.LOGGER.info("post - '/' - called");
-    const obj = new models.Coin(req.body);
+    const obj = new models.CoinValue(req.body);
 
     helpers.LOGGER.info(`object modeled: ${JSON.stringify(obj)}`);
     obj.save((err, o) => {
@@ -61,7 +59,7 @@ class Coin {
 
     helpers.LOGGER.info(`cid: ${JSON.stringify(cid)}`);
 
-    models.Coin.findByIdAndDelete(cid, (err, o) => {
+    models.CoinValue.findByIdAndDelete(cid, (err, o) => {
       helpers.LOGGER.info(`error: ${JSON.stringify(err)}`);
       if (err) {
         next(boom.notFound(err));
@@ -78,4 +76,4 @@ class Coin {
   }
 }
 
-export default Coin;
+export default CoinValue;

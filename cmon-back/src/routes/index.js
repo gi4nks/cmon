@@ -1,5 +1,9 @@
 import coin from './coin';
+import coinvalue from './coinvalue';
+import watchlist from './watchlist';
 
 export default {
-  coin
+  coin,
+  coinvalue,
+  watchlist
 };
